@@ -8,12 +8,12 @@ const login = process.env.SMTP_LOGIN ||"---"
 const password = process.env.SMTP_PASSWORD ||"---"
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(cors())
-app.options('*', cors());
-app.all('*', function (req, res) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
-    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-})
+// app.options('*', cors());
+// app.all('*', function (req, res) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
+//     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+// })
 app.use(bodyParser.json())
 
 let transporter = nodemailer.createTransport({
@@ -27,7 +27,7 @@ app.get("/", function (req, res) {
     res.send('Hello')
 })
 app.post('/sendMessage', async (req, res) => {
-
+    res.header("Access-Control-Allow-Origin", "*");
     let {message, email, name} = req.body
 
     await transporter.sendMail({
