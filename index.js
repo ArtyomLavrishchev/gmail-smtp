@@ -7,7 +7,13 @@ const port = process.env.PORT || 3010
 const login = process.env.SMTP_LOGIN ||"---"
 const password = process.env.SMTP_PASSWORD ||"---"
 app.use(bodyParser.urlencoded({extended: false}))
-app.use(cors())
+
+const corsOptions = {
+    credentials: true,
+    origin: "http://localhost:3000/"
+}
+
+app.use(cors(corsOptions))
 app.use(bodyParser.json())
 
 let transporter = nodemailer.createTransport({
