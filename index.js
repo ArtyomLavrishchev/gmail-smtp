@@ -7,12 +7,7 @@ const port = process.env.PORT || 3010
 const login = process.env.SMTP_LOGIN ||"---"
 const password = process.env.SMTP_PASSWORD ||"---"
 app.use(bodyParser.urlencoded({extended: false}))
-
-const corsOptions = {
-    credentials: true,
-}
-
-app.use(cors(corsOptions))
+app.use(cors())
 app.use(bodyParser.json())
 
 let transporter = nodemailer.createTransport({
