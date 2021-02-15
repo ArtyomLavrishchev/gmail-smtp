@@ -7,13 +7,14 @@ const app = express()
 const port = process.env.PORT || 3010
 const login = process.env.SMTP_LOGIN ||"---"
 const password = process.env.SMTP_PASSWORD ||"---"
-app.use(cors())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-});
+
+const corsOptions = {
+    credentials: true
+};
+
+app.use(cors(corsOptions))
 
 let transporter = nodemailer.createTransport({
     service: "gmail",
