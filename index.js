@@ -4,8 +4,8 @@ const cors = require("cors")
 const bodyParser = require("body-parser")
 const app = express()
 const port = process.env.PORT || 3010
-const login = process.env.SMTP_LOGIN ||"---"
-const password = process.env.SMTP_PASSWORD ||"---"
+const login = process.env.SMTP_LOGIN || "---"
+const password = process.env.SMTP_PASSWORD || "---"
 app.use(cors())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
@@ -13,8 +13,8 @@ app.use(bodyParser.json())
 let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: "artyom.portfolio@gmail.com",
-        pass: "Valeria0404",
+        user: login,
+        pass: password,
     },
 });
 app.get("/", function (req, res) {
